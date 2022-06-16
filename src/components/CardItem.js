@@ -18,7 +18,7 @@ export default function CardItem({item, handleCheck, showCard}) {
       />
       </div>
       <CardBody>
-        <CardText className='card-text'>
+        <CardText className='cardText'>
           {item.descr}
         </CardText>
         <Button onClick={showCard} color='primary'>Подробнее</Button>

@@ -2,26 +2,10 @@ import { useState } from 'react'
 import {Container, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Input, Button} from 'reactstrap'
 import Logo from '../images/logo.jpg'
 
-export default function Header({setStart, setLogIn, logged, logOut, handleMyAcc}) {
-  let [isOpenCat, setIsOpenCat] = useState(false)
-  let [isOpenCity, setIsOpenCity] = useState(false)
-
-  let [city, setCity] = useState('Все города')
-  let [cat, setCat] = useState('Все категории')
-
-  let changeCity = (e) => {
-    setCity(e.target.innerText)
-  }
-
-  let changeCat = (e) => {
-    setCat(e.target.innerText)
-  }
-
-  let toggleOpen = (state, changeState) => {
-    changeState(!state)
-  }
+export default function Header({setStart, setLogIn, logged, logOut, handleMyAcc, toggleOpen, setSr,
+  changeCat, changeCity, city, cat, isOpenCat, setIsOpenCat, isOpenCity, setIsOpenCity, srch, SEARCH, handleAddGood}) {
   let size = 8;
-  logged ? size = 7 : size = 8
+  logged ? size = 6 : size = 8
   return (
   <div  className='header'>
     <Container>
@@ -48,30 +32,12 @@ export default function Header({setStart, setLogIn, logged, logOut, handleMyAcc}
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
-            <Input placeholder='Поиск по объявлениям' />
-            <Dropdown className='drop-city' isOpen={isOpenCity} onClick={() => toggleOpen(isOpenCity, setIsOpenCity)} toggle={function noRefCheck(){}}>
-              <DropdownToggle color='primary' caret>
-                {city}
-              </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem onClick={changeCity}>
-                  Санкт-Петербург
-                </DropdownItem>
-                <DropdownItem onClick={changeCity}>
-                  Москва
-                </DropdownItem>
-                <DropdownItem onClick={changeCity}>
-                  Минск
-                </DropdownItem>
-                <DropdownItem onClick={changeCity}>
-                  Все города
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-            <Button color='primary'>Найти</Button>
+            <Input onChange={setSr} value={srch} placeholder='Поиск по объявлениям' />
+            <Button onClick={SEARCH} color='primary'>Найти</Button>
           </div>
         </Col>
-        {logged ? <><Col className='centered'><Button onClick={handleMyAcc} className='my-acc' color='primary'>Мой аккаунт</Button><Button color='primary' onClick={logOut}>Выйти</Button></Col></>
+        {/* <Button onClick={handleMyAcc} className='my-acc' color='primary'>Мой аккаунт</Button> */}
+        {logged ? <><Col className=' hdr-btns'><Button onClick={handleAddGood} className='my-acc' color='primary'>Разместить объявление</Button><Button onClick={handleMyAcc} className='my-acc' color='primary'>Избранное</Button></Col></>
         : <Col className='centered log-in' xs="2"><Button color='primary' onClick={setLogIn}>Войти</Button></Col>}
       </Row>
     </Container>

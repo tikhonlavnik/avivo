@@ -32,7 +32,6 @@ export default function MyAcc({list, delGood}) {
                 {item.descr}
               </CardText>
             <div className='btn-grp'>
-              <Button color='primary'>Подробнее</Button>
               <Button onClick={() => delGood(item)} color='danger'>Удалить</Button>
             </div>
             </CardBody>
